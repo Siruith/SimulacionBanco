@@ -5,19 +5,16 @@
  */
 package simulacionbanco;
 
-import core.Base;
 import core.Cola;
 import modelo.Cajero;
 import datos.Clientes;
 import java.net.URL;
-import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import java.util.LinkedList;
-import principal.ImplementarCola;
 import java.util.Iterator;
 
 /**
@@ -57,6 +54,9 @@ public class FXMLDocumentController implements Initializable {
         for(int i = 0; i <=5; i++){
             caja.add(new Cajero());
         }
+        
+        generarCliente();
+        comprobarCajas();
     } 
     private void generarCliente(){
         int edad = (int)(Math.random()*(80-16+1)+16);

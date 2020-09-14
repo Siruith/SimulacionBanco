@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane id="AnchorPane" prefHeight="618.0" prefWidth="809.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simulacionbanco.FXMLDocumentController">
@@ -22,5 +23,11 @@
             <TableColumn prefWidth="75.0" text="Cajero 6" />
         </columns>
       </TableView>
+      <TableView layoutX="220.0" layoutY="309.0" prefHeight="200.0" prefWidth="77.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+        </columns>
+      </TableView>
+      <TextArea layoutX="362.0" layoutY="309.0" prefHeight="200.0" prefWidth="200.0" />
     </children>
 </AnchorPane>
