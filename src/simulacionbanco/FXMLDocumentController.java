@@ -45,6 +45,18 @@ public class FXMLDocumentController implements Initializable {
     private int totalCaja4;
     private int totalCaja5;
     private int totalCaja6;
+    private int tiempoAtendido1;
+    private int tiempoAtendido2;
+    private int tiempoAtendido3;
+    private int tiempoAtendido4;
+    private int tiempoAtendido5;
+    private int tiempoAtendido6;
+    private int promedio1;
+    private int promedio2;
+    private int promedio3;
+    private int promedio4;
+    private int promedio5;
+    private int promedio6;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -73,6 +85,24 @@ public class FXMLDocumentController implements Initializable {
                 cajero.setEdadCliente(c.getEdad());
                 cajero.setTiempoTransaccion(c.getTiempoTransaccion());
                 cajero.setNumClientes(cajero.getNumClientes() + 1);
+                if(cajero == caja.get(0)){
+                        tiempoAtendido1 += c.getTiempoTransaccion();
+                    }
+                    else if(cajero == caja.get(1)){
+                        tiempoAtendido2 += c.getTiempoTransaccion();
+                    }
+                    else if(cajero == caja.get(2)){
+                        tiempoAtendido3 += c.getTiempoTransaccion();
+                    }
+                    else if(cajero == caja.get(3)){
+                        tiempoAtendido4 += c.getTiempoTransaccion();
+                    }
+                    else if(cajero == caja.get(4)){
+                        tiempoAtendido5 += c.getTiempoTransaccion();
+                    }
+                    else if(cajero == caja.get(5)){
+                        tiempoAtendido6 += c.getTiempoTransaccion();
+                    }
             }
             else{
                 if(cajero.getTiempoTransaccion() > 0){
