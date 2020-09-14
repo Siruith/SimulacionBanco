@@ -8,6 +8,6 @@
     <children>
         <Button fx:id="button" layoutX="628.0" layoutY="353.0" onAction="#handleButtonAction" text="Inicializar" />
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <Button fx:id="button1" layoutX="631.0" layoutY="396.0" onAction="#handleButtonAction" text="Finalizar" />
+      <Button fx:id="button1" layoutX="631.0" layoutY="396.0" onAction="#handleButtonAction1" text="Finalizar" />
     </children>
 </AnchorPane>
