@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -7,12 +10,12 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="618.0" prefWidth="809.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simulacionbanco.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="618.0" prefWidth="809.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simulacionbanco.FXMLDocumentController">
     <children>
-        <Button fx:id="button" layoutX="628.0" layoutY="353.0" onAction="#handleButtonAction" text="Inicializar" />
+        <Button fx:id="button" layoutX="628.0" layoutY="353.0" onAction="#inicializar" text="Inicializar" />
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <Button fx:id="button1" layoutX="631.0" layoutY="396.0" onAction="#handleButtonAction1" text="Finalizar" />
-      <TableView layoutX="46.0" layoutY="37.0" prefHeight="200.0" prefWidth="524.0">
+      <Button fx:id="button1" layoutX="631.0" layoutY="396.0" onAction="#finalizar" text="Finalizar" />
+      <TableView fx:id="TableView" layoutX="46.0" layoutY="37.0" prefHeight="200.0" prefWidth="524.0">
         <columns>
             <TableColumn prefWidth="75.0" />
           <TableColumn prefWidth="75.0" text="Cajero 1" />
@@ -28,6 +31,6 @@
           <TableColumn prefWidth="75.0" text="C1" />
         </columns>
       </TableView>
-      <TextArea layoutX="362.0" layoutY="309.0" prefHeight="200.0" prefWidth="200.0" />
+      <TextArea fx:id="TxtArea" layoutX="362.0" layoutY="309.0" prefHeight="200.0" prefWidth="200.0" />
     </children>
 </AnchorPane>

@@ -8,6 +8,7 @@ package simulacionbanco;
 import core.Cola;
 import modelo.Cajero;
 import datos.Clientes;
+import java.awt.Button;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -16,6 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import java.util.LinkedList;
 import java.util.Iterator;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 
 /**
  *
@@ -25,6 +28,14 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private Label label;
+    @FXML
+    private Button button;
+    @FXML
+    private Button button1;
+    @FXML
+    private TextArea TxtArea;
+    @FXML
+    private TableView TableView;
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
