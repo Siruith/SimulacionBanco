@@ -42,6 +42,12 @@ public class FXMLDocumentController implements Initializable {
     
     private Cola<Clientes> cola;
     private LinkedList<Cajero> caja;
+    private int totalCaja1;
+    private int totalCaja2;
+    private int totalCaja3;
+    private int totalCaja4;
+    private int totalCaja5;
+    private int totalCaja6;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -59,6 +65,43 @@ public class FXMLDocumentController implements Initializable {
         cola.encolar(c);
     }
     private void comprobarCajas(){
+        for(Iterator<Cajero> it = caja.iterator(); it.hasNext();){
+            Cajero cajero = it.next();
+            if(cajero.isEstado() && !cola.estaVacia()){
+                Clientes c = cola.desencolar();
+                cajero.setEstado(false);
+                cajero.setEdadCliente(c.getEdad());
+                cajero.setTiempoTransaccion(c.getTiempoTransaccion());
+                cajero.setNumClientes(cajero.getNumClientes() + 1);
+            }
+            else{
+                if(cajero.getTiempoTransaccion() > 0){
+                    cajero.setTiempoTransaccion(cajero.getTiempoTransaccion() - 1);
+                    if(cajero == caja.get(0)){
+                        totalCaja1 += 1;
+                    }
+                    else if(cajero == caja.get(1)){
+                        totalCaja2 += 1;
+                    }
+                    else if(cajero == caja.get(2)){
+                        totalCaja3 += 1;
+                    }
+                    else if(cajero == caja.get(3)){
+                        totalCaja4 += 1;
+                    }
+                    else if(cajero == caja.get(4)){
+                        totalCaja5 += 1;
+                    }
+                    else if(cajero == caja.get(5)){
+                        totalCaja6 += 1;
+                    }
+                    
+                }
+                if(cajero.getTiempoTransaccion() == 0){
+                    cajero.setEstado(true);
+                }
+            }
+        };
         
     }
     
