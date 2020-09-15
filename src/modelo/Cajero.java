@@ -17,6 +17,16 @@ public class Cajero {
     private int edadCliente;
     
     private int numClientes;
+    
+    private int tiempoTotal = 0;
+    
+  
+      public void sumaTiempo(int tiempoClientes){
+          
+        tiempoTotal+=tiempoClientes;
+    }
+    
+  
 
     public Cajero(boolean estado, int tiempoTransaccion, int edadCliente, int numClientes) {
         this.estado = estado;
