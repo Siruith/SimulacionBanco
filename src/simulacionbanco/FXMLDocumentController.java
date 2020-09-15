@@ -48,19 +48,24 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TableView TableView;
 
+   
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
-
-    @FXML
-    private void handleButtonAction1(ActionEvent event) {
+    private void inicializar(ActionEvent event) {
         System.out.println("You clicked me!");
         label.setText("Sup!");
     }
 
-    private Cola<Clientes> cola;
+    private Cola<Clientes> colaCliente;
+    
+     @FXML
+    private void finalizar(ActionEvent event) {
+         System.out.println("You clicked me!");
+        
+     
+        
+    }
+
+   
     private LinkedList<Cajero> caja;
     private int totalCaja1;
     private int totalCaja2;
@@ -86,13 +91,9 @@ public class FXMLDocumentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-    }
-
-    @FXML
-    public void inicializar() {
+     
         // TODO
-        cola = new Cola<>();
+        colaCliente = new Cola<>();
         caja = new LinkedList<>();
         for (int i = 0; i <= 5; i++) {
             caja.add(new Cajero());
@@ -115,7 +116,12 @@ public class FXMLDocumentController implements Initializable {
         webEngineCajas = WebViewCajas.getEngine();
         // generarCliente();
         //comprobarCajas();
+    
+
     }
+
+    
+    
 
     public void iniciarCajas() {
         generarCliente();
@@ -155,14 +161,14 @@ public class FXMLDocumentController implements Initializable {
         int edad = (int) (Math.random() * (80 - 16 + 1) + 16);
         int tiempo = (int) (Math.random() * (60 - 5 + 1) + 5);
         Clientes c = new Clientes(edad, tiempo);
-        cola.encolar(c);
+        colaCliente.encolar(c);
     }
 
     private void comprobarCajas() {
         for (Iterator<Cajero> it = caja.iterator(); it.hasNext();) {
             Cajero cajero = it.next();
-            if (cajero.isEstado() && !cola.estaVacia()) {
-                Clientes c = cola.desencolar();
+            if (cajero.isEstado() && !colaCliente.estaVacia()) {
+                Clientes c = colaCliente.desencolar();
                 cajero.setEstado(false);
                 cajero.setEdadCliente(c.getEdad());
                 cajero.setTiempoTransaccion(c.getTiempoTransaccion());
