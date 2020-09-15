@@ -17,9 +17,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import java.util.LinkedList;
 import java.util.Iterator;
+import java.util.Timer;
+import java.util.TimerTask;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.ObservableList;
+
 import javafx.event.EventHandler;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -78,6 +81,7 @@ public class FXMLDocumentController implements Initializable {
     private int promedio5;
     private int promedio6;
     private Timeline time;
+
     private int tiempoTotal;
 
     @Override
@@ -94,16 +98,23 @@ public class FXMLDocumentController implements Initializable {
             caja.add(new Cajero());
 
         }
-        time = new Timeline(new KeyFrame(Duration.seconds(2), new EventHandler<ActionEvent>() {
+        time = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                iniciarCajas();
             }
+        }));
+        time.setCycleCount(Animation.INDEFINITE);
+//        new Timer().schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                System.out.println("entre");
+//            }
+//        }, 0, 5000);
 
-        }
-        ));
-        generarCliente();
-        comprobarCajas();
+        webEngineCajas = WebViewCajas.getEngine();
+        // generarCliente();
+        //comprobarCajas();
     }
 
     public void iniciarCajas() {
@@ -201,6 +212,14 @@ public class FXMLDocumentController implements Initializable {
 
     public void setCaja(LinkedList<Cajero> caja) {
         this.caja = caja;
+    }
+
+    public Timeline getTime() {
+        return time;
+    }
+
+    public void setTime(Timeline time) {
+        this.time = time;
     }
 
 }
