@@ -26,11 +26,11 @@
             <TableColumn prefWidth="75.0" text="Cajero 6" />
         </columns>
       </TableView>
-      <TableView fx:id="Tableview2" layoutX="220.0" layoutY="309.0" prefHeight="200.0" prefWidth="77.0">
+      <TableView layoutX="220.0" layoutY="309.0" prefHeight="200.0" prefWidth="77.0">
         <columns>
           <TableColumn prefWidth="75.0" text="C1" />
         </columns>
       </TableView>
-      <TextArea fx:id="TxtArea" layoutX="370.0" layoutY="309.0" prefHeight="200.0" prefWidth="200.0" />
+      <TextArea fx:id="TxtArea" layoutX="362.0" layoutY="309.0" prefHeight="200.0" prefWidth="200.0" />
     </children>
 </AnchorPane>
