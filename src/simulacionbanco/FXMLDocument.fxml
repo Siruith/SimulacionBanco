@@ -22,6 +22,6 @@
         </columns>
       </TableView>
       <TextArea fx:id="TxtArea" layoutX="362.0" layoutY="309.0" prefHeight="200.0" prefWidth="200.0" />
-      <WebView fx:id="WebViewCajas" layoutX="120.0" layoutY="62.0" prefHeight="200.0" prefWidth="574.0" />
+      <WebView layoutX="120.0" layoutY="62.0" prefHeight="200.0" prefWidth="574.0" />
     </children>
 </AnchorPane>

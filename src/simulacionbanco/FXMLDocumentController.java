@@ -39,6 +39,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private WebView WebViewCajas;
     private WebEngine webEngineCajas;
+
     @FXML
     private TextArea TxtArea;
     @FXML
@@ -110,6 +111,27 @@ public class FXMLDocumentController implements Initializable {
         comprobarCajas();
         tiempoTotal++;
         webEngineCajas.loadContent(construirViewCajeros());
+    }
+
+    public String construirViewCajeros() {
+        String htmlcode = "";
+        String estado;
+        int contador = 0;
+
+        for (int i = 0; i < 6; i++) {
+
+            if (contador == 0) {
+                htmlcode += "<th> caja </th> ";
+            }
+            if (caja.get(i).isEstado()) {
+                htmlcode += "<th bgcolor=\"green\">" + (i + 1) + "<\th>";
+            } else {
+                htmlcode += "<th bgcolor=\"red\">" + (i + 1) + "<\th>";
+            }
+            contador++;
+        }
+
+        return htmlcode;
     }
 
     @FXML
