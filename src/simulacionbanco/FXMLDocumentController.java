@@ -17,36 +17,45 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import java.util.LinkedList;
 import java.util.Iterator;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.util.Duration;
 
 /**
  *
  * @author Sebastián
  */
 public class FXMLDocumentController implements Initializable {
-    
+
     @FXML
     private Label label;
-    
+
+    @FXML
+    private WebView WebViewCajas;
+    private WebEngine webEngineCajas;
     @FXML
     private TextArea TxtArea;
     @FXML
     private TableView TableView;
-    
+
     @FXML
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
     }
-    
+
     @FXML
     private void handleButtonAction1(ActionEvent event) {
         System.out.println("You clicked me!");
         label.setText("Sup!");
     }
-    
+
     private Cola<Clientes> cola;
     private LinkedList<Cajero> caja;
     private int totalCaja1;
@@ -67,13 +76,14 @@ public class FXMLDocumentController implements Initializable {
     private int promedio4;
     private int promedio5;
     private int promedio6;
-    private ObservableList<Cajero> listaOBservable;
-    
+    private Timeline time;
+    private int tiempoTotal;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
     }
-    
+
     @FXML
     public void inicializar() {
         // TODO
@@ -81,31 +91,40 @@ public class FXMLDocumentController implements Initializable {
         caja = new LinkedList<>();
         for (int i = 0; i <= 5; i++) {
             caja.add(new Cajero());
+
         }
-        for (int i = 0; i < caja.size(); i++) {
-            Cajero get = caja.get(i);
-            listaOBservable.add(i, get);
-            
+        time = new Timeline(new KeyFrame(Duration.seconds(2), new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+            }
+
         }
-        TableView.setItems(listaOBservable);
-        
+        ));
         generarCliente();
         comprobarCajas();
     }
-    
+
+    public void iniciarCajas() {
+        generarCliente();
+        comprobarCajas();
+        tiempoTotal++;
+        webEngineCajas.loadContent(construirViewCajeros());
+    }
+
     @FXML
     public void finalizar() {
         // TODO
         System.out.println("Finaliza proceso");
     }
-    
+
     private void generarCliente() {
         int edad = (int) (Math.random() * (80 - 16 + 1) + 16);
         int tiempo = (int) (Math.random() * (60 - 5 + 1) + 5);
         Clientes c = new Clientes(edad, tiempo);
         cola.encolar(c);
     }
-    
+
     private void comprobarCajas() {
         for (Iterator<Cajero> it = caja.iterator(); it.hasNext();) {
             Cajero cajero = it.next();
@@ -144,30 +163,22 @@ public class FXMLDocumentController implements Initializable {
                     } else if (cajero == caja.get(5)) {
                         totalCaja6 += 1;
                     }
-                    
+
                 }
                 if (cajero.getTiempoTransaccion() == 0) {
                     cajero.setEstado(true);
                 }
             }
         };
-        
+
     }
-    
+
     public LinkedList<Cajero> getCaja() {
         return caja;
     }
-    
+
     public void setCaja(LinkedList<Cajero> caja) {
         this.caja = caja;
     }
-    
-    public ObservableList<Cajero> getListaOBservable() {
-        return listaOBservable;
-    }
-    
-    public void setListaOBservable(ObservableList<Cajero> listaOBservable) {
-        this.listaOBservable = listaOBservable;
-    }
-    
+
 }

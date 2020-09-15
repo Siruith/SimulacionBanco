@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.web.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -15,22 +16,12 @@
         <Button layoutX="628.0" layoutY="353.0" onAction="#inicializar" text="Inicializar" />
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
       <Button fx:id="button1" layoutX="631.0" layoutY="396.0" onAction="#finalizar" text="Finalizar" />
-      <TableView fx:id="TableView" layoutX="46.0" layoutY="37.0" prefHeight="200.0" prefWidth="524.0">
-        <columns>
-            <TableColumn prefWidth="75.0" />
-          <TableColumn prefWidth="75.0" text="Cajero 1" />
-          <TableColumn prefWidth="75.0" text="Cajero 2" />
-            <TableColumn prefWidth="75.0" text="Cajero 3" />
-            <TableColumn prefWidth="75.0" text="Cajero 4" />
-            <TableColumn prefWidth="75.0" text="Cajero 5" />
-            <TableColumn prefWidth="75.0" text="Cajero 6" />
-        </columns>
-      </TableView>
       <TableView layoutX="220.0" layoutY="309.0" prefHeight="200.0" prefWidth="77.0">
         <columns>
           <TableColumn prefWidth="75.0" text="C1" />
         </columns>
       </TableView>
       <TextArea fx:id="TxtArea" layoutX="362.0" layoutY="309.0" prefHeight="200.0" prefWidth="200.0" />
+      <WebView fx:id="WebViewCajas" layoutX="120.0" layoutY="62.0" prefHeight="200.0" prefWidth="574.0" />
     </children>
 </AnchorPane>
