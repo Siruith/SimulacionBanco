@@ -105,7 +105,7 @@ public class FXMLDocumentController implements Initializable {
 
         }
         System.out.println(caja.size());
-//       
+        construirViewCajeros();
     }
 
     public void iniciarCajas() {
@@ -117,31 +117,33 @@ public class FXMLDocumentController implements Initializable {
 
     public void construirViewCajeros() {
 //AQUI SE INICIALIZARA LA VISTA DEL TABLEVIEW
-        TableView.setEditable(true);
+
         listadoCajeros = FXCollections.observableArrayList(
-                new Cajero(true,10,20,10),
+                new Cajero(true, 10, 20, 10),
                 new Cajero(),
                 new Cajero(),
                 new Cajero(),
                 new Cajero()
         );
+        TableView.setEditable(true);
         TableView.setItems(listadoCajeros);
-//        listadoCajeros.add(0, new Cajero());
-//        time = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-////                iniciarCajas();
-//                System.out.println("entre aca");
-//            }
-//        }));
-//        time.setCycleCount(Animation.INDEFINITE);
-//        new Timer().schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                System.out.println("entre");
-//            }
-//        }, 0, 5000);
-        webEngineCajas = WebViewCajas.getEngine();
+
+        //        listadoCajeros.add(0, new Cajero());
+        //        time = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
+        //            @Override
+        //            public void handle(ActionEvent event) {
+        ////                iniciarCajas();
+        //                System.out.println("entre aca");
+        //            }
+        //        }));
+        //        time.setCycleCount(Animation.INDEFINITE);
+        //        new Timer().schedule(new TimerTask() {
+        //            @Override
+        //            public void run() {
+        //                System.out.println("entre");
+        //            }
+        //        }, 0, 5000);
+//                webEngineCajas = WebViewCajas.getEngine();
         generarCliente();
         comprobarCajas();
 //        String htmlcode = "";
