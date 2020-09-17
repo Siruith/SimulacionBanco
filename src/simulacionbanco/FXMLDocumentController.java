@@ -32,6 +32,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -105,7 +106,7 @@ public class FXMLDocumentController implements Initializable {
 
         }
         System.out.println(caja.size());
-        construirViewCajeros();
+        //  construirViewCajeros();
     }
 
     public void iniciarCajas() {
@@ -125,6 +126,33 @@ public class FXMLDocumentController implements Initializable {
                 new Cajero(),
                 new Cajero()
         );
+
+        TableView.setEditable(true);
+        TableView.setMinSize(200, 300);
+        TableColumn estado = new TableColumn("estado");
+        estado.setMinWidth(20);
+        estado.setCellValueFactory(
+                new PropertyValueFactory<Cajero, String>("estado"));
+        TableColumn tiempoTransaccion = new TableColumn("tiempoTransaccion");
+        tiempoTransaccion.setMinWidth(10);
+        tiempoTransaccion.setCellValueFactory(
+                new PropertyValueFactory<Cajero, String>("tiempoTransaccion"));
+        TableColumn edadClientes = new TableColumn("edadClientes");
+        edadClientes.setMinWidth(10);
+        edadClientes.setCellValueFactory(
+                new PropertyValueFactory<Cajero, String>("edadClientes"));
+        TableColumn numClientes = new TableColumn("numClientes");
+        numClientes.setMinWidth(10);
+        numClientes.setCellValueFactory(
+                new PropertyValueFactory<Cajero, String>("numClientes"));
+        TableColumn tiempoTotal = new TableColumn("tiempoTotal");
+        tiempoTotal.setMinWidth(10);
+        tiempoTotal.setCellValueFactory(
+                new PropertyValueFactory<Cajero, String>("tiempoTotal"));
+
+        TableView.setItems(listadoCajeros);
+        TableView.getColumns().addAll(estado, tiempoTransaccion, edadClientes, numClientes, tiempoTotal);
+
         TableView.setEditable(true);
         TableView.setItems(listadoCajeros);
 
