@@ -22,11 +22,6 @@
         </columns>
       </TableView>
       <TextArea fx:id="TxtArea" layoutX="362.0" layoutY="309.0" prefHeight="200.0" prefWidth="200.0" />
-      <TableView fx:id="TableView" layoutX="90.0" layoutY="62.0" prefHeight="200.0" prefWidth="625.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
+      <TableView fx:id="TableView" layoutX="90.0" layoutY="62.0" prefHeight="200.0" prefWidth="625.0" />
     </children>
 </AnchorPane>

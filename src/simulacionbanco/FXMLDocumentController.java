@@ -22,6 +22,8 @@ import java.util.TimerTask;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -30,12 +32,14 @@ import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.util.Callback;
 import javafx.util.Duration;
 
 /**
@@ -43,14 +47,14 @@ import javafx.util.Duration;
  * @author Sebastián
  */
 public class FXMLDocumentController implements Initializable {
-
+    
     @FXML
     private Label label;
-
+    
     @FXML
     private WebView WebViewCajas;
     private WebEngine webEngineCajas;
-
+    
     @FXML
     private TextArea TxtArea;
     @FXML
@@ -62,13 +66,13 @@ public class FXMLDocumentController implements Initializable {
         System.out.println("You clicked me!");
         construirViewCajeros();
     }
-
+    
     private Cola<Clientes> colaCliente;
-
+    
     @FXML
     private void finalizar(ActionEvent event) {
         System.out.println("You clicked me!");
-
+        
     }
     private ObservableList<Cajero> cajas;
     private LinkedList<Cajero> caja;
@@ -93,68 +97,78 @@ public class FXMLDocumentController implements Initializable {
     private Timeline time;
     private ObservableList<Cajero> listadoCajeros;
     private int tiempoTotal;
-
+    TableColumn numCaja = new TableColumn("numCaja");
+    TableColumn estado = new TableColumn("estado");
+    TableColumn tiempoTransaccion = new TableColumn("tiempoTransaccion");
+    TableColumn edadCliente = new TableColumn("edadCliente");
+    TableColumn numClientes = new TableColumn("numClientes");
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 //AL INICIALIZAR SE CREAN LOS 6 CAJEROS POR DEFECTO
         // TODO
         colaCliente = new Cola<>();
         caja = new LinkedList<>();
+        listadoCajeros = FXCollections.observableArrayList();
         for (int i = 0; i <= 5; i++) {
-
+            
             caja.add(new Cajero());
-
+            
+            listadoCajeros.add(i, new Cajero());
         }
+        
         System.out.println(caja.size());
         //  construirViewCajeros();
     }
-
+    
     public void iniciarCajas() {
         generarCliente();
         comprobarCajas();
         tiempoTotal++;
 //        webEngineCajas.loadContent(construirViewCajeros());
     }
-
+    
     public void construirViewCajeros() {
 //AQUI SE INICIALIZARA LA VISTA DEL TABLEVIEW
 
-        listadoCajeros = FXCollections.observableArrayList(
-                new Cajero(true, 10, 20, 10),
-                new Cajero(),
-                new Cajero(),
-                new Cajero(),
-                new Cajero()
-        );
-
+//        listadoCajeros = FXCollections.observableArrayList(
+//                new Cajero(true, 10, 20, 10),
+//                new Cajero(),
+//                new Cajero(),
+//                new Cajero(),
+//                new Cajero()
+//        );
         TableView.setEditable(true);
-        TableView.setMinSize(200, 300);
-        TableColumn estado = new TableColumn("estado");
-        estado.setMinWidth(20);
+//        TableView.setMinSize(200, 300);
+
+//        numCaja.setCellValueFactory(new Callback<CellDataFeatures<Cajero, String>, ObservableList<String>>() {
+//            @Override
+//            public ObservableList<String> call(CellDataFeatures<Cajero, String> param) {
+//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            }
+//           
+//        });
+//        estado.setMinWidth(20);
         estado.setCellValueFactory(
                 new PropertyValueFactory<Cajero, String>("estado"));
-        TableColumn tiempoTransaccion = new TableColumn("tiempoTransaccion");
-        tiempoTransaccion.setMinWidth(10);
+
+//        tiempoTransaccion.setMinWidth(10);
         tiempoTransaccion.setCellValueFactory(
                 new PropertyValueFactory<Cajero, String>("tiempoTransaccion"));
-        TableColumn edadClientes = new TableColumn("edadClientes");
-        edadClientes.setMinWidth(10);
-        edadClientes.setCellValueFactory(
-                new PropertyValueFactory<Cajero, String>("edadClientes"));
-        TableColumn numClientes = new TableColumn("numClientes");
-        numClientes.setMinWidth(10);
+
+//        edadClientes.setMinWidth(10);
+        edadCliente.setCellValueFactory(
+                new PropertyValueFactory<Cajero, String>("edadCliente"));
+
+//        numClientes.setMinWidth(10);
         numClientes.setCellValueFactory(
                 new PropertyValueFactory<Cajero, String>("numClientes"));
-        TableColumn tiempoTotal = new TableColumn("tiempoTotal");
-        tiempoTotal.setMinWidth(10);
-        tiempoTotal.setCellValueFactory(
-                new PropertyValueFactory<Cajero, String>("tiempoTotal"));
-
+//        numCaja.setText("");
         TableView.setItems(listadoCajeros);
-        TableView.getColumns().addAll(estado, tiempoTransaccion, edadClientes, numClientes, tiempoTotal);
+        TableView.getColumns().addAll(estado, tiempoTransaccion, edadCliente, numClientes);
 
-        TableView.setEditable(true);
-        TableView.setItems(listadoCajeros);
+//        TableView.setEditable(true);
+//        TableView.setItems(listadoCajeros);
 
         //        listadoCajeros.add(0, new Cajero());
         //        time = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
@@ -193,20 +207,20 @@ public class FXMLDocumentController implements Initializable {
 //
 //        return htmlcode;
     }
-
+    
     @FXML
     public void finalizar() {
         // TODO
         System.out.println("Finaliza proceso");
     }
-
+    
     private void generarCliente() {
         int edad = (int) (Math.random() * (80 - 16 + 1) + 16);
         int tiempo = (int) (Math.random() * (60 - 5 + 1) + 5);
         Clientes c = new Clientes(edad, tiempo);
         colaCliente.encolar(c);
     }
-
+    
     private void comprobarCajas() {
         for (Iterator<Cajero> it = caja.iterator(); it.hasNext();) {
             Cajero cajero = it.next();
@@ -245,38 +259,86 @@ public class FXMLDocumentController implements Initializable {
                     } else if (cajero == caja.get(5)) {
                         totalCaja6 += 1;
                     }
-
+                    
                 }
                 if (cajero.getTiempoTransaccion() == 0) {
                     cajero.setEstado(true);
                 }
             }
         };
-
+        
     }
-
+    
     public LinkedList<Cajero> getCaja() {
         return caja;
     }
-
+    
     public void setCaja(LinkedList<Cajero> caja) {
         this.caja = caja;
     }
-
+    
     public Timeline getTime() {
         return time;
     }
-
+    
     public void setTime(Timeline time) {
         this.time = time;
     }
-
+    
     public ObservableList<Cajero> getListadoCajeros() {
         return listadoCajeros;
     }
-
+    
     public void setListadoCajeros(ObservableList<Cajero> listadoCajeros) {
         this.listadoCajeros = listadoCajeros;
     }
-
+    
+    public Cola<Clientes> getColaCliente() {
+        return colaCliente;
+    }
+    
+    public void setColaCliente(Cola<Clientes> colaCliente) {
+        this.colaCliente = colaCliente;
+    }
+    
+    public ObservableList<Cajero> getCajas() {
+        return cajas;
+    }
+    
+    public void setCajas(ObservableList<Cajero> cajas) {
+        this.cajas = cajas;
+    }
+    
+    public TableColumn getEstado() {
+        return estado;
+    }
+    
+    public void setEstado(TableColumn estado) {
+        this.estado = estado;
+    }
+    
+    public TableColumn getEdadCliente() {
+        return edadCliente;
+    }
+    
+    public void setEdadCliente(TableColumn edadCliente) {
+        this.edadCliente = edadCliente;
+    }
+    
+    public TableColumn getNumClientes() {
+        return numClientes;
+    }
+    
+    public void setNumClientes(TableColumn numClientes) {
+        this.numClientes = numClientes;
+    }
+    
+    public TableColumn getNumCaja() {
+        return numCaja;
+    }
+    
+    public void setNumCaja(TableColumn numCaja) {
+        this.numCaja = numCaja;
+    }
+    
 }
