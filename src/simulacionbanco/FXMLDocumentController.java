@@ -22,6 +22,8 @@ import java.util.TimerTask;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.ReadOnlyIntegerWrapper;
+import javafx.beans.property.ReadOnlyListWrapper;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -64,6 +66,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void inicializar(ActionEvent event) {
         System.out.println("You clicked me!");
+        System.out.println(colaCliente.toString());
         construirViewCajeros();
     }
 
@@ -130,7 +133,7 @@ public class FXMLDocumentController implements Initializable {
 
     public void renderTableViewCajas() {
         TableView.setItems(listadoCajeros);
-      //  TableView.getColumns().addAll(estado, tiempoTransaccion, edadCliente, numClientes);
+        //  TableView.getColumns().addAll(estado, tiempoTransaccion, edadCliente, numClientes);
 
     }
 
@@ -237,7 +240,7 @@ public class FXMLDocumentController implements Initializable {
         int tiempo = (int) (Math.random() * (60 - 5 + 1) + 5);
         Clientes c = new Clientes(edad, tiempo);
         colaCliente.encolar(c);
-        System.out.println(colaCliente.toString());
+        //System.out.println(colaCliente.toString());
     }
 
     private void comprobarCajas() {
@@ -245,12 +248,12 @@ public class FXMLDocumentController implements Initializable {
             Cajero cajero = it.next();
             if (cajero.isEstado() && !colaCliente.estaVacia()) {
                 Clientes c = colaCliente.desencolar();
-
 //                System.out.println(colaCliente.toString());
                 cajero.setEstado(false);
                 cajero.setEdadCliente(c.getEdad());
                 cajero.setTiempoTransaccion(c.getTiempoTransaccion());
                 cajero.setNumClientes(cajero.getNumClientes() + 1);
+                System.out.println(cajero.toString());
                 if (cajero == caja.get(0)) {
                     tiempoAtendido1 += c.getTiempoTransaccion();
                 } else if (cajero == caja.get(1)) {
