@@ -46,7 +46,10 @@ import javafx.util.Duration;
 
 /**
  *
- * @author Sebastián
+ * @author Jairo Vergara Portocarrero 2151714
+ * @author Jorge Enrique Moreno Barragan 2175321
+ * @author Juan David Mosquera Castro 2150186
+ * @author Sebastián Bejarano Cuero 2190853
  */
 public class FXMLDocumentController implements Initializable {
 
@@ -173,7 +176,7 @@ public class FXMLDocumentController implements Initializable {
         numClientes.setCellValueFactory(
                 new PropertyValueFactory<Cajero, String>("numClientes"));
 //        numCaja.setText("");
-        TableView.setItems(listadoCajeros);
+        TableView.setItems(listadoCajeros);//
         TableView.getColumns().addAll(estado, tiempoTransaccion, edadCliente, numClientes);
 
         Timer timer = new Timer();
@@ -182,9 +185,7 @@ public class FXMLDocumentController implements Initializable {
             @Override
             public void run() {
 
-                generarCliente();
-                comprobarCajas();
-                renderTableViewCajas();
+                iniciarCajas();
 // construirViewCajeros();
             }
         };
@@ -253,7 +254,7 @@ public class FXMLDocumentController implements Initializable {
                 cajero.setEdadCliente(c.getEdad());
                 cajero.setTiempoTransaccion(c.getTiempoTransaccion());
                 cajero.setNumClientes(cajero.getNumClientes() + 1);
-                System.out.println(cajero.toString());
+
                 if (cajero == caja.get(0)) {
                     tiempoAtendido1 += c.getTiempoTransaccion();
                 } else if (cajero == caja.get(1)) {
@@ -289,6 +290,7 @@ public class FXMLDocumentController implements Initializable {
                     cajero.setEstado(true);
                 }
             }
+            System.out.println(cajero.toString());
         };
 
     }
