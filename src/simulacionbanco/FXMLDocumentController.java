@@ -159,7 +159,7 @@ public class FXMLDocumentController implements Initializable {
 //        edadClientes.setMinWidth(10);
         edadCliente.setCellValueFactory(
                 new PropertyValueFactory<Cajero, String>("edadCliente"));
-
+ 
 //        numClientes.setMinWidth(10);
         numClientes.setCellValueFactory(
                 new PropertyValueFactory<Cajero, String>("numClientes"));
