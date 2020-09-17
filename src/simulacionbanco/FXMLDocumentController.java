@@ -47,14 +47,14 @@ import javafx.util.Duration;
  * @author Sebastián
  */
 public class FXMLDocumentController implements Initializable {
-    
+
     @FXML
     private Label label;
-    
+
     @FXML
     private WebView WebViewCajas;
     private WebEngine webEngineCajas;
-    
+
     @FXML
     private TextArea TxtArea;
     @FXML
@@ -66,13 +66,13 @@ public class FXMLDocumentController implements Initializable {
         System.out.println("You clicked me!");
         construirViewCajeros();
     }
-    
+
     private Cola<Clientes> colaCliente;
-    
+
     @FXML
     private void finalizar(ActionEvent event) {
         System.out.println("You clicked me!");
-        
+
     }
     private ObservableList<Cajero> cajas;
     private LinkedList<Cajero> caja;
@@ -102,7 +102,7 @@ public class FXMLDocumentController implements Initializable {
     TableColumn tiempoTransaccion = new TableColumn("tiempoTransaccion");
     TableColumn edadCliente = new TableColumn("edadCliente");
     TableColumn numClientes = new TableColumn("numClientes");
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 //AL INICIALIZAR SE CREAN LOS 6 CAJEROS POR DEFECTO
@@ -111,23 +111,29 @@ public class FXMLDocumentController implements Initializable {
         caja = new LinkedList<>();
         listadoCajeros = FXCollections.observableArrayList();
         for (int i = 0; i <= 5; i++) {
-            
+
             caja.add(new Cajero());
-            
+
             listadoCajeros.add(i, new Cajero());
         }
-        
+
         System.out.println(caja.size());
         //  construirViewCajeros();
     }
-    
+
     public void iniciarCajas() {
         generarCliente();
         comprobarCajas();
         tiempoTotal++;
 //        webEngineCajas.loadContent(construirViewCajeros());
     }
-    
+
+    public void renderTableViewCajas() {
+        TableView.setItems(listadoCajeros);
+      //  TableView.getColumns().addAll(estado, tiempoTransaccion, edadCliente, numClientes);
+
+    }
+
     public void construirViewCajeros() {
 //AQUI SE INICIALIZARA LA VISTA DEL TABLEVIEW
 
@@ -159,7 +165,7 @@ public class FXMLDocumentController implements Initializable {
 //        edadClientes.setMinWidth(10);
         edadCliente.setCellValueFactory(
                 new PropertyValueFactory<Cajero, String>("edadCliente"));
- 
+
 //        numClientes.setMinWidth(10);
         numClientes.setCellValueFactory(
                 new PropertyValueFactory<Cajero, String>("numClientes"));
@@ -167,9 +173,22 @@ public class FXMLDocumentController implements Initializable {
         TableView.setItems(listadoCajeros);
         TableView.getColumns().addAll(estado, tiempoTransaccion, edadCliente, numClientes);
 
+        Timer timer = new Timer();
+        TimerTask caja = new TimerTask() {
+
+            @Override
+            public void run() {
+
+                generarCliente();
+                comprobarCajas();
+                renderTableViewCajas();
+// construirViewCajeros();
+            }
+        };
+        timer.schedule(caja, 0, 1000);
+
 //        TableView.setEditable(true);
 //        TableView.setItems(listadoCajeros);
-
         //        listadoCajeros.add(0, new Cajero());
         //        time = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
         //            @Override
@@ -186,8 +205,7 @@ public class FXMLDocumentController implements Initializable {
         //            }
         //        }, 0, 5000);
 //                webEngineCajas = WebViewCajas.getEngine();
-        generarCliente();
-        comprobarCajas();
+//        comprobarCajas();
 //        String htmlcode = "";
 //        String estado;
 //        int contador = 0;
@@ -207,25 +225,28 @@ public class FXMLDocumentController implements Initializable {
 //
 //        return htmlcode;
     }
-    
+
     @FXML
     public void finalizar() {
         // TODO
         System.out.println("Finaliza proceso");
     }
-    
+
     private void generarCliente() {
         int edad = (int) (Math.random() * (80 - 16 + 1) + 16);
         int tiempo = (int) (Math.random() * (60 - 5 + 1) + 5);
         Clientes c = new Clientes(edad, tiempo);
         colaCliente.encolar(c);
+        System.out.println(colaCliente.toString());
     }
-    
+
     private void comprobarCajas() {
         for (Iterator<Cajero> it = caja.iterator(); it.hasNext();) {
             Cajero cajero = it.next();
             if (cajero.isEstado() && !colaCliente.estaVacia()) {
                 Clientes c = colaCliente.desencolar();
+
+//                System.out.println(colaCliente.toString());
                 cajero.setEstado(false);
                 cajero.setEdadCliente(c.getEdad());
                 cajero.setTiempoTransaccion(c.getTiempoTransaccion());
@@ -259,86 +280,86 @@ public class FXMLDocumentController implements Initializable {
                     } else if (cajero == caja.get(5)) {
                         totalCaja6 += 1;
                     }
-                    
+
                 }
                 if (cajero.getTiempoTransaccion() == 0) {
                     cajero.setEstado(true);
                 }
             }
         };
-        
+
     }
-    
+
     public LinkedList<Cajero> getCaja() {
         return caja;
     }
-    
+
     public void setCaja(LinkedList<Cajero> caja) {
         this.caja = caja;
     }
-    
+
     public Timeline getTime() {
         return time;
     }
-    
+
     public void setTime(Timeline time) {
         this.time = time;
     }
-    
+
     public ObservableList<Cajero> getListadoCajeros() {
         return listadoCajeros;
     }
-    
+
     public void setListadoCajeros(ObservableList<Cajero> listadoCajeros) {
         this.listadoCajeros = listadoCajeros;
     }
-    
+
     public Cola<Clientes> getColaCliente() {
         return colaCliente;
     }
-    
+
     public void setColaCliente(Cola<Clientes> colaCliente) {
         this.colaCliente = colaCliente;
     }
-    
+
     public ObservableList<Cajero> getCajas() {
         return cajas;
     }
-    
+
     public void setCajas(ObservableList<Cajero> cajas) {
         this.cajas = cajas;
     }
-    
+
     public TableColumn getEstado() {
         return estado;
     }
-    
+
     public void setEstado(TableColumn estado) {
         this.estado = estado;
     }
-    
+
     public TableColumn getEdadCliente() {
         return edadCliente;
     }
-    
+
     public void setEdadCliente(TableColumn edadCliente) {
         this.edadCliente = edadCliente;
     }
-    
+
     public TableColumn getNumClientes() {
         return numClientes;
     }
-    
+
     public void setNumClientes(TableColumn numClientes) {
         this.numClientes = numClientes;
     }
-    
+
     public TableColumn getNumCaja() {
         return numCaja;
     }
-    
+
     public void setNumCaja(TableColumn numCaja) {
         this.numCaja = numCaja;
     }
-    
+
 }
